@@ -117,7 +117,7 @@ certutil.exe -encode mimikatz.exe mimikatz.txt
 certutil.exe -decode mimikatz.txt mimikatz.exe
 
 cat binary.exe | base64 -w 0
-echo {base64_data} | base64 -d -w 0
+echo {base64_data} | base64 -d > binary.exe
 ```
 
 ## print.exe
