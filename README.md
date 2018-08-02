@@ -89,7 +89,7 @@ Links:
 https://www.greyhathacker.net/?tag=download-and-execute
 
 
-## ssh / pscp.exe
+## scp / pscp.exe
 
 pscp.exe C:\Users\Public\info.txt user@target:/tmp/info.txt
 
