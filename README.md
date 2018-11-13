@@ -203,10 +203,7 @@ https://superuser.com/questions/25538/how-to-download-files-from-command-line-in
 
 ## smb
 
-```
-smbclient //10.10.10.10/share -U username -W domain
-get info.txt`
-```
+`smbclient //10.10.10.10/share -U username -W domain`
 
 `net use Q: \\10.10.10.10\share`
 
