@@ -201,6 +201,10 @@ curl -o /tmp/info.txt http://10.10.10.10:80/info.txt
 
 rdesktop 10.10.10.10 -r disk:linux='/home/user/rdesktop/files'
 
+## smb
 
+smbclient //10.10.10.10/share -U username -W domain
+get test.txt
 
-
+net use Q: \\10.10.10.10\share
+pushd \\10.10.10.10\share
