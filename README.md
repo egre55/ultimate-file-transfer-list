@@ -207,4 +207,5 @@ smbclient //10.10.10.10/share -U username -W domain
 get test.txt
 
 net use Q: \\10.10.10.10\share
+
 pushd \\10.10.10.10\share
