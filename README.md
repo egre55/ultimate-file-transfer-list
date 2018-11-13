@@ -209,6 +209,8 @@ https://superuser.com/questions/25538/how-to-download-files-from-command-line-in
 
 `pushd \\10.10.10.10\share`
 
+`mklink /D share \\10.10.10.10\share`
+
 ## ftp
 
 ```
