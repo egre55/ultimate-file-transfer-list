@@ -208,3 +208,20 @@ https://superuser.com/questions/25538/how-to-download-files-from-command-line-in
 `net use Q: \\10.10.10.10\share`
 
 `pushd \\10.10.10.10\share`
+
+## ftp
+
+```
+open 10.10.10.10
+anonymous
+anonymous
+lcd c:\uploads
+get info.txt
+quit
+
+ftp -s:script.txt
+```
+
+Reference:
+
+https://www.jscape.com/blog/using-windows-ftp-scripts-to-automate-file-transfers
