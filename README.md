@@ -148,7 +148,7 @@ Links:
 
 https://twitter.com/Oddvarmoe/status/984749424395112448
 
-for fuller list of WebDAV downloaders check @api0cradle LOLBINS/LOLBAS project:
+for a more complete list of WebDAV downloaders check the LOLBINS/LOLBAS project created by @api0cradle:
 https://github.com/api0cradle/LOLBAS/blob/master/LOLBins.md
 
 
@@ -231,6 +231,6 @@ quit
 ftp -s:script.txt
 ```
 
-Reference:
+Links:
 
 https://www.jscape.com/blog/using-windows-ftp-scripts-to-automate-file-transfers
