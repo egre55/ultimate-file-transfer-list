@@ -271,6 +271,8 @@ https://staheri.com/my-blog/2013/january/vbscript-download-file-from-url/
 
 ## ftp
 
+> ftp -s:script.txt
+
 ```
 open 10.10.10.10
 anonymous
@@ -278,8 +280,6 @@ anonymous
 lcd c:\uploads
 get info.txt
 quit
-
-ftp -s:script.txt
 ```
 
 Links:
