@@ -38,6 +38,31 @@
 `Invoke-Command -ComputerName 10.10.10.132 -ScriptBlock {Set-Content -Path C:\Temp\nc.exe -value $using:file}`
 
 
+### SSH-Server via PowerShell
+
+`Get-WindowsCapability -Online | Where-Object Name -like 'OpenSSH*'` 
+
+This returns some output, based on which you would then something like: 
+
+`Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0` 
+`Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0` 
+
+To start an SSH-server: 
+ `Start-Service sshd` 
+
+ To uninstall the SSH-server/client: 
+
+`Remove-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0` 
+`Remove-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0` 
+
+You may have some firewall issues, refer to https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse#install-openssh-using-powershell. 
+
+It's also possible via the GUI: 
+
+Open **Settings**, select **Apps** > **Apps & Features**, then select **Optional Features**. Then select **Add a feature**, and you should be able to install OpenSSH Client and Server. 
+
+
+
 ## Base64 Encode/Decode
 
 #### Encode
