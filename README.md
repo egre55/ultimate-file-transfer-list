@@ -348,6 +348,14 @@ https://staheri.com/my-blog/2013/january/vbscript-download-file-from-url/
 
 ## Remote Desktop
 
+### Start Remote Desktop in Windows PowerShell
+
+`Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -name "fDenyTSConnections" -value 0` 
+`Enable-NetFirewallRule -DisplayGroup "Remote Desktop"` 
+
+To end Remote Desktop: 
+`Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -name "fDenyTSConnections" -value 1` 
+
 ### rdesktop
 
 `rdesktop 10.10.10.10 -r disk:linux='/home/user/rdesktop/files'`
