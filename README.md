@@ -487,7 +487,7 @@ With administrative access to a Windows machine, IIS can be installed.
 
 This can be done in the GUI:
 
-![iis_gui](assets/iis_gui.png) 
+![iis_gui](assets/iis_gui.PNG) 
 
 Or in the CLI:
 
