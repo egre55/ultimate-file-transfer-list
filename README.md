@@ -42,7 +42,7 @@
 
 `Get-WindowsCapability -Online | Where-Object Name -like 'OpenSSH*'` 
 
-This returns some output, based on which you would then something like: 
+This returns some output, based on which you would then do something like: 
 
 `Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0` 
 `Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0` 
