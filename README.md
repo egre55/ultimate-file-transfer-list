@@ -485,6 +485,14 @@ socat TCP-LISTEN:80,reuseaddr,fork
 
 With administrative access to a Windows machine, IIS can be installed. 
 
+This can be done in the GUI:
+
+![iis_gui](assets/iis_gui.png) 
+
+Or in the CLI:
+
 `Add-WindowsFeature Web-Server, Web-Mgmt-Tools`
 
+The above might not work on some versions of Windows. In that case, try the following:  
 
+`Dism.exe /online /enable-feature /featureName:IIS-DefaultDocument /All`
