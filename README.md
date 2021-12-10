@@ -512,7 +512,7 @@ python -m SimpleHTTPServer 80
 python3 -m http.server 80
 ruby -run -ehttpd . -p80
 php -S 0.0.0.0:80
-socat TCP-LISTEN:80,reuseaddr,fork
+socat TCP-LISTEN:8080,reuseaddr,fork SYSTEM:"echo HTTP/1.0 200; echo Content-Type\: text/plain;"
 ```
 
 
