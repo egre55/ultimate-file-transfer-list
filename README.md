@@ -38,6 +38,31 @@
 `Invoke-Command -ComputerName 10.10.10.132 -ScriptBlock {Set-Content -Path C:\Temp\nc.exe -value $using:file}`
 
 
+### SSH-Server via PowerShell
+
+`Get-WindowsCapability -Online | Where-Object Name -like 'OpenSSH*'` 
+
+This returns some output, based on which you would then do something like: 
+
+`Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0` 
+`Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0` 
+
+To start an SSH-server: 
+ `Start-Service sshd` 
+
+ To uninstall the SSH-server/client: 
+
+`Remove-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0` 
+`Remove-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0` 
+
+You may have some firewall issues, refer to https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse#install-openssh-using-powershell. 
+
+It's also possible via the GUI: 
+
+Open **Settings**, select **Apps** > **Apps & Features**, then select **Optional Features**. Then select **Add a feature**, and you should be able to install OpenSSH Client and Server. 
+
+
+
 ## Base64 Encode/Decode
 
 #### Encode
@@ -323,6 +348,14 @@ https://staheri.com/my-blog/2013/january/vbscript-download-file-from-url/
 
 ## Remote Desktop
 
+### Start Remote Desktop in Windows PowerShell
+
+`Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -name "fDenyTSConnections" -value 0` 
+`Enable-NetFirewallRule -DisplayGroup "Remote Desktop"` 
+
+To end Remote Desktop: 
+`Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -name "fDenyTSConnections" -value 1` 
+
 ### rdesktop
 
 `rdesktop 10.10.10.10 -r disk:linux='/home/user/rdesktop/files'`
@@ -488,11 +521,20 @@ python -m SimpleHTTPServer 80
 python3 -m http.server 80
 ruby -run -ehttpd . -p80
 php -S 0.0.0.0:80
-socat TCP-LISTEN:80,reuseaddr,fork
+socat TCP-LISTEN:8080,reuseaddr,fork SYSTEM:"echo HTTP/1.0 200; echo Content-Type\: text/plain;"
 ```
 
 
 With administrative access to a Windows machine, IIS can be installed. 
 
+This can be done in the GUI:
+
+![iis_gui](assets/iis_gui.PNG) 
+
+Or in the CLI:
+
 `Add-WindowsFeature Web-Server, Web-Mgmt-Tools`
 
+The above might not work on some versions of Windows. In that case, try the following:  
+
+`Dism.exe /online /enable-feature /featureName:IIS-DefaultDocument /All`
